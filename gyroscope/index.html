@@ -1,0 +1,51 @@
+<html>
+<head>
+<style type="text/css">
+	#background {
+		width:35%;
+		height:35%;
+		background-color:red;
+		color: black;
+	}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script> 
+
+function iOSversion() {
+  if (/iP(hone|od|ad)/.test(navigator.platform)) {
+    var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+    return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+  }
+}
+
+ver = iOSversion();
+
+if (ver[0] >= 5) {
+  alert('This is running iOS 5 or later. Lucky you.');
+}
+
+window.addEventListener("deviceorientation", function(event) {
+          // process event.alpha, event.beta and event.gamma
+          var x = event.gamma;
+		  var y = event.beta;
+		  var z = event.alpha;
+		  
+		  var text = document.getElementById("output");
+		  text.innerHTML = x + ", " + y + ", " + z;
+		  
+		  var bg = document.getElementById("background");
+		  
+		  if (z > 310) {
+		  bg.style.backgroundColor = "blue";
+		  } else {
+		  bg.style.backgroundColor = "red";
+		  }
+      }, true);
+</script>
+</head>
+
+<body>
+<div id="background"></div>
+<div id="output"></div>
+</body>
+</html>
